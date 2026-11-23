@@ -1,9 +1,9 @@
-# vault
+# ttencrypt
 
 A small, dependency-light Python implementation of the **TTEncrypt** payload format: gzip compression, a SHA-512 checksum, and AES-128-CBC, wrapped in a salted envelope.
 
 ```python
-from vault import enc, dec
+from ttencrypt import enc, dec
 
 blob = enc("hello world")
 print(dec(blob))  # hello world
@@ -23,14 +23,14 @@ print(dec(blob))  # hello world
 pip install pycryptodome
 ```
 
-Then drop `vault.py` into your project.
+Then drop `ttencrypt.py` into your project.
 
 ## Usage
 
 ### Functions
 
 ```python
-from vault import enc, dec
+from ttencrypt import enc, dec
 
 blob = enc("some text")            # bytes
 text = dec(blob)                   # "some text"
@@ -49,7 +49,7 @@ assert enc("data", nonce) == enc("data", nonce)
 ### Class wrapper
 
 ```python
-from vault import Vault
+from ttencrypt import Vault
 
 v = Vault(nonce=bytes(32))   # nonce is optional
 blob = v.encrypt("data")
@@ -59,7 +59,7 @@ v.decrypt(blob)
 ### Errors
 
 ```python
-from vault import dec, SealError
+from ttencrypt import dec, SealError
 
 try:
     dec(b"not a payload")
